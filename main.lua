@@ -17,8 +17,8 @@ KeepBottomText = ""
 EnableBadge = false
 shouldUsePush = false
 
-newsTitle = love.graphics.newImage("bbcbox.png")
-worldTitle = love.graphics.newImage("worldbox.png")
+newsTitle = love.graphics.newImage("images/bbcbox.png")
+worldTitle = love.graphics.newImage("images/worldbox.png")
 
 server = sock.newServer("*", 10655)
 
@@ -44,11 +44,11 @@ local waterMarkFont = love.graphics.newFont("fonts/ReithSansMd.ttf",40)
 local waterMarkFontSmall = love.graphics.newFont("fonts/ReithSansMd.ttf",20)
 
 function love.load()
-    bg = love.graphics.newImage("backdrop.png")
+    bg = love.graphics.newImage("images/backdrop.png")
 
-    Fader = love.graphics.newImage("HeadlineFade.png")
+    Fader = love.graphics.newImage("images/HeadlineFade.png")
 
-    BBCSmall = love.graphics.newImage("WhiteLogoTransparent.png")
+    BBCSmall = love.graphics.newImage("images/WhiteLogoTransparent.png")
 
     ReithSerif = love.graphics.newFont("fonts/ReithSerifRg.ttf",130)
     ReithSansBold = love.graphics.newFont("fonts/ReithSansBd.ttf",30)
@@ -59,7 +59,7 @@ function love.load()
     TickerFontBold = love.graphics.newFont("fonts/ReithSansBd.ttf",32)
     PresenterName = love.graphics.newFont("fonts/ReithSerifMd.ttf",56)
 
-    Splash = love.graphics.newImage("splash.png")
+    Splash = love.graphics.newImage("images/splash.png")
 
     if shouldUsePush == true then
         local gameWidth, gameHeight = 1920,1080 --fixed game resolution

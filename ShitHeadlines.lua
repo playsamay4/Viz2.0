@@ -9,7 +9,7 @@ ShitHeadlines = {
             y = 781,
             w = 390,
             h = 50,
-            logo = love.graphics.newImage("WhiteLogoTransparent.png"),
+            logo = love.graphics.newImage("images/WhiteLogoTransparent.png"),
             font = love.graphics.newFont("fonts/ReithSansBd.ttf",35)
         },
         Text = {

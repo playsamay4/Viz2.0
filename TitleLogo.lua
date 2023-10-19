@@ -6,8 +6,8 @@ TitleLogo = {
 
 
 Chameleon = {
-    bimg = love.graphics.newImage("b.png"),
-    cimg = love.graphics.newImage("c.png"),
+    bimg = love.graphics.newImage("images/b.png"),
+    cimg = love.graphics.newImage("images/c.png"),
     c = {1,1,1,1},
     Showing = false,
     vy = 74,
