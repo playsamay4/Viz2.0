@@ -135,7 +135,7 @@ function love.draw()
         love.graphics.print("Made by playsamay4\n\nhttps://github.com/playsamay4/Viz2.0\n\nWaiting for connection from VizHelper...", 100, 700)
         love.graphics.print("Viz2.0", 1750,1000)
 
-        love.graphics.setColor(1,1,1,0.3)
+        love.graphics.setColor(1,1,1,waterMarkFade.a-0.7)
         love.graphics.setFont(waterMarkFontSmall)
         love.graphics.print("Press F11 to toggle fullscreen mode", 10, 10)
         
