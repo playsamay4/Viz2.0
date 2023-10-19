@@ -1,4 +1,4 @@
-local TTimer = require "timer"
+local TTimer = require "lib.timer"
 
 DontRunTicker = false
 

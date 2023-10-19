@@ -6,11 +6,11 @@
 ]]
 
 
-Anim = require "flux"
-Timer = require "timer"
-inspect = require "inspect"
-push = require "push"
-local sock = require "sock"
+Anim = require "lib.flux"
+Timer = require "lib.timer"
+inspect = require "lib.inspect"
+push = require "lib.push"
+local sock = require "lib.sock"
 local ShowBG = false
 KeepTopText = ""
 KeepBottomText = ""
@@ -60,9 +60,6 @@ function love.load()
     PresenterName = love.graphics.newFont("fonts/ReithSerifMd.ttf",56)
 
     Splash = love.graphics.newImage("splash.png")
-
-    tcpThread = love.thread.newThread("tcp.lua")
-    tcpThread:start()
 
     if shouldUsePush == true then
         local gameWidth, gameHeight = 1920,1080 --fixed game resolution
