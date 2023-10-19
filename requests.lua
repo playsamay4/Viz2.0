@@ -349,22 +349,6 @@ server:on("headline", function(data)
 
     end
 
-    -- if data.Type == "Show-InfoBadge" then
-    --     --Split the text into a table by new line
-    --     local split = {}
-    --     for match in (data.Text):gmatch("[^\r\n]+") do
-    --         table.insert(split, match)
-    --     end
-        
-    --     ShowInfoBadge(split[1])
-    --     Timer.after(4, function()
-    --         if split[2] ~= nil then
-    --             ShowInfoBadge(split[2])
-    --         end
-    --     end)
-    -- end
-
-
     if data.Type == "Show-CreditBadge" then
         ShowCreditBadge(data.Text)
     end
@@ -495,7 +479,3 @@ function convertTableToCondensedString(tbl)
     end
     return str
 end
-
-local tbl = {0.82342523513, 0.1237, 0.915153585}
-local str = convertTableToCondensedString(tbl)
-print(str)  -- Output: "0.5/0.7/1.0"

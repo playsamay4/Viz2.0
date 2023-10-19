@@ -1,9 +1,8 @@
 
 --[[
-    MADE BY PLAYSAMAY4 (Discord: playsamay4#3646)
-    DO NOT REDISTRIBUTE WITHOUT PERMISSION
-
     Viz2.0
+
+    MADE BY playsamay4
 ]]
 
 
@@ -23,8 +22,6 @@ worldTitle = love.graphics.newImage("worldbox.png")
 
 server = sock.newServer("*", 10655)
 
-
---ThemeColor = {0.68,0,0}
 ThemeColor = {185/255, 0,0}
 
 require "Headlines"
@@ -38,7 +35,6 @@ require "BreakfastIntroClock"
 require "LowerThirdClock"
 require "Flash"
 require "AVplayout"
-require "requests2"
 
 require "ShitHeadlines"
 
@@ -92,7 +88,6 @@ function love.update(dt)
 
     end
 
-
     Anim.update(dt)
     Timer.update(dt)
     server:update()
@@ -134,11 +129,6 @@ function love.draw()
     DrawLowerThirdClock()
 
     if Single then DrawHeadlineSingle() else DrawHeadlineDouble() end
-
-    
-    
-
-
 
     if waterMark == true then
         love.graphics.setColor(1,1,1,waterMarkFade.a)
@@ -234,7 +224,7 @@ function love.keypressed(key)
     end
 
     if key == "n" then
-
+        waterMark = not waterMark
     end
 
     if key == "d" then
@@ -313,11 +303,6 @@ end
 function love.resize(w,h)
     push:resize(w, h)
 end
---test
-
-
---HideHeadlineSingle()
---HidePlaceName()
 
 HideHeadlineInstant()
 HidePlaceNameInstant()

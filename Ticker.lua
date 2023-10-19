@@ -2,33 +2,7 @@ local TTimer = require "timer"
 
 DontRunTicker = false
 
-TickerSequence = 
-{
-    --{mode = "Head", text = "bbc.co.uk/news", duration = 1},
-    -- -- {mode = "BreakingHead", text = "BREAKING", duration = 3},
-    -- -- {mode = "Breaking", text = "A man in connection to multiple murders in Stockton has been arrested", duration = 5},
-    -- -- {mode = "Breaking", text = "Police arrested Wesley Brownlee, 43, of Stockton just before dawn this Sunday", duration = 5},
-    -- {mode = "Head", text = "HEADLINES", duration = 2},
-    -- {mode = "Normal", text = "Edit the text in VizHelper", duration = 5},
-    
-
-    -- --{mode = "Normal", text = "Ukraine war: Putin tells Russian soldiers' mothers he shares their pain", duration = 5},
-    -- --{mode = "Normal", text = "Ukraine war: 6 million without power as winter bites", duration = 5},
-    -- --{mode = "Normal", text = "World Cup: Iran protesters confronted at World Cup game against Wales", duration = 5},
-    -- --{mode = "Normal", text = "Kanye West announces 2024 presidential bid", duration = 5},
-    -- --{mode = 'Normal', text = "Emergencies Act: Trudeau defends use to end 'Freedom Convoy' protests", duration = 5},
-    -- --{mode = 'Normal', text = "US Walmart shooting: Weapon purchased morning of attack", duration = 5},
-    -- --{mode = 'Normal', text = "Ukraine war: Russia atrocities bring Nato members closer", duration = 5},
-    -- --{mode = 'Normal', text = "Elon Musk says Twitter will offer 'amnesty' to suspended accounts", duration = 5},
-    -- {mode = 'BlueHead', text = "INTERACTIVE", duration = 3},
-    -- {mode = 'Normal', text = "Edit the text in VizHelper", duration = 5},
-    -- --3,5
-
-    --{mode = "BreakingHead", text = "BREAKING", duration = 3},
-    --{mode = "Breaking", text = "Manchester united are rubbish", duration = 3},
-
-    
-}
+TickerSequence = {}
 TickerI = 0
 TickerRunning = false
 

@@ -330,16 +330,6 @@ function DrawLowerThirdFull()
         love.graphics.setFont(LowerThirdFull.ProgramBadge.Font)
         love.graphics.printf(LowerThirdFull.ProgramBadge.Text,LowerThirdFull.ProgramBadge.x,LowerThirdFull.ProgramBadge.y+3+LowerThirdFull.ProgramBadge.TextYOffset,LowerThirdFull.ProgramBadge.w,"center")
     love.graphics.setScissor()
-
-
-    --DEBUG
-    --Draw presenter name scissor
-    --love.graphics.setColor(1,0,0,0.5)
-    --love.graphics.rectangle("fill",LowerThirdFull.PresenterNameScissor.x,LowerThirdFull.PresenterNameScissor.y,LowerThirdFull.PresenterNameScissor.w,LowerThirdFull.PresenterNameScissor.h)
-
-    --Draw BBC Box
-    --love.graphics.setColor(0,1,0,0.5)
-    --love.graphics.rectangle("fill",LowerThirdFull.BBCBox.x,LowerThirdFull.BBCBox.y,LowerThirdFull.BBCBox.w,LowerThirdFull.BBCBox.h)
 end
 
 function HideLowerThirdFull()
