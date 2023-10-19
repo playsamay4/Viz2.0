@@ -18,7 +18,7 @@ KeepBottomText = ""
 EnableBadge = false
 shouldUsePush = false
 
-newsTitle = love.graphics.newImage("BBCbox.png")
+newsTitle = love.graphics.newImage("bbcbox.png")
 worldTitle = love.graphics.newImage("worldbox.png")
 
 server = sock.newServer("*", 10655)
@@ -45,6 +45,7 @@ require "ShitHeadlines"
 waterMark = true
 waterMarkFade = {a = 1}
 local waterMarkFont = love.graphics.newFont("fonts/ReithSansMd.ttf",40)
+local waterMarkFontSmall = love.graphics.newFont("fonts/ReithSansMd.ttf",20)
 
 function love.load()
     bg = love.graphics.newImage("backdrop.png")
@@ -146,6 +147,10 @@ function love.draw()
         love.graphics.setFont(waterMarkFont)
         love.graphics.print("Made by playsamay4\n\nhttps://github.com/playsamay4/Viz2.0\n\nWaiting for connection from VizHelper...", 100, 700)
         love.graphics.print("Viz2.0", 1750,1000)
+
+        love.graphics.setColor(1,1,1,0.3)
+        love.graphics.setFont(waterMarkFontSmall)
+        love.graphics.print("Press F11 to toggle fullscreen mode", 10, 10)
         
     end
     
@@ -268,6 +273,18 @@ function love.keypressed(key)
         end)
     end
 
+    if key == "f11" then
+        shouldUsePush = not shouldUsePush
+        if shouldUsePush == true then
+            local gameWidth, gameHeight = 1920,1080 --fixed game resolution
+            local windowWidth, windowHeight = 1280,720
+
+            push:setupScreen(gameWidth, gameHeight, windowWidth, windowHeight, {resizable = true,canvas = true, fullscreen = false})
+        else
+            love.window.setMode(1920,1080, {resizable = false, fullscreen = false})
+        end
+    end
+
     -- if key == "]" then
     --     ShitHeadlines.lookN.HeadBox.h = ShitHeadlines.lookN.HeadBox.h + 1
     -- end
@@ -296,20 +313,19 @@ end
 function love.resize(w,h)
     push:resize(w, h)
 end
-
+--test
 
 
 --HideHeadlineSingle()
 --HidePlaceName()
 
--- HideHeadlineInstant()
--- HidePlaceNameInstant()
--- HideLowerThirdFullInstant()
--- HideBreakfastIntroClockInstant()
--- HideLowerThirdClockInstant()
--- HideBadgesInstant()
--- HideChameleonInstant()
---ShowLowerThirdFull()
+HideHeadlineInstant()
+HidePlaceNameInstant()
+HideLowerThirdFullInstant()
+HideBreakfastIntroClockInstant()
+HideLowerThirdClockInstant()
+HideBadgesInstant()
+HideChameleonInstant()
 
 
 
