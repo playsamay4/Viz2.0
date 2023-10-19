@@ -44,6 +44,11 @@ local waterMarkFont = love.graphics.newFont("fonts/ReithSansMd.ttf",40)
 local waterMarkFontSmall = love.graphics.newFont("fonts/ReithSansMd.ttf",20)
 
 function love.load()
+    
+    local icon = love.image.newImageData("images/icon.png")
+    love.window.setIcon(icon)
+    
+
     bg = love.graphics.newImage("images/backdrop.png")
 
     Fader = love.graphics.newImage("images/HeadlineFade.png")
