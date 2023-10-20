@@ -298,21 +298,21 @@ function HideHeadlineDouble()
     Anim.to(HeadlineFadeColor, 1.8, {1,1,1,0})
     HeadlineShowing = false
     --Move whole logo box up
-    Anim.to(Headline.BBCBox, .5, {y = 650-50}):ease("quartin")
-    Anim.to(Headline.BBCText, .5, {y = 650-50}):ease("quartin")
-    Anim.to(Headline.BBCLogo, .5, {y = 650-50}):ease("quartin")
-    Anim.to(Headline.comingUpBox, .5, {y = 650-50}):ease("quartin")
-    Anim.to(Headline.comingUpText, .5, {y = 650-50}):ease("quartin")
+    Anim.to(Headline.BBCBox, .5, {y = 650-50}):ease("quartout")
+    Anim.to(Headline.BBCText, .5, {y = 650-50}):ease("quartout")
+    Anim.to(Headline.BBCLogo, .5, {y = 650-50}):ease("quartout")
+    Anim.to(Headline.comingUpBox, .5, {y = 650-50}):ease("quartout")
+    Anim.to(Headline.comingUpText, .5, {y = 650-50}):ease("quartout")
 
     --Make Left Bar Purple and White shrink downwards
-    LeftBarPurpleAnim = Anim.to(Headline.LeftBarPurple, 1, {y = 650+350}):ease("quartinout")
-    LeftBarWhiteAnim = Anim.to(Headline.LeftBarWhite, 1, {y = 650+350}):ease("quartinout")
+    LeftBarPurpleAnim = Anim.to(Headline.LeftBarPurple, 1, {y = 650+350}):ease("quartout")
+    LeftBarWhiteAnim = Anim.to(Headline.LeftBarWhite, 1, {y = 650+350}):ease("quartout")
 
     --Move Lower Text up
-    Anim.to(Headline, 0.5, {TextYLo = 820-215}):ease("quartin"):delay(0.20)
+    Anim.to(Headline, 0.8, {TextYLo = 820-215}):ease("quartout"):delay(0.15)
 
     --Move Upper Text up
-    Anim.to(Headline, 0.5, {TextYHi = 680-215}):ease("quartin"):delay(0.15)
+    Anim.to(Headline, 0.8, {TextYHi = 680-215}):ease("quartout"):delay(0.10)
 
 end
 
@@ -344,19 +344,22 @@ function ShowHeadlineDouble()
     Headline.BBCLogo.y = 657+50
     Headline.comingUpBox.y = 650+50
     Headline.comingUpText.y = 650+50
-    Anim.to(Headline.BBCBox, 1, {y = 650}):ease("quartinout"):delay(0.20)
-    Anim.to(Headline.BBCText, 1, {y = 650}):ease("quartinout"):delay(0.20)
-    Anim.to(Headline.BBCLogo, 1, {y = 657}):ease("quartinout"):delay(0.20)
-    Anim.to(Headline.comingUpBox, 1, {y = 650}):ease("quartinout"):delay(0.20)
-    Anim.to(Headline.comingUpText, 1, {y = 650}):ease("quartinout"):delay(0.20)
+    Anim.to(Headline.BBCBox, 1, {y = 650}):ease("quartout"):delay(0.20)
+    Anim.to(Headline.BBCText, 1, {y = 650}):ease("quartout"):delay(0.20)
+    Anim.to(Headline.BBCLogo, 1, {y = 657}):ease("quartout"):delay(0.20)
+    Anim.to(Headline.comingUpBox, 1, {y = 650}):ease("quartout"):delay(0.20)
+    Anim.to(Headline.comingUpText, 1, {y = 650}):ease("quartout"):delay(0.20)
 
     --Make Left bar white grow downwards
     Headline.LeftBarWhite.y = 650-350
-    Anim.to(Headline.LeftBarWhite, 1, {y = 650}):ease("quartinout")
+    --Anim.to(Headline.LeftBarWhite, 1, {y = 650}):ease("quartinout")
+    Anim.to(Headline.LeftBarWhite, 1, {y = 650}):ease("quartout")
 
     --Make Left Bar Purple grow downwards
     Headline.LeftBarPurple.y = 650-350
-    Anim.to(Headline.LeftBarPurple, 1, {y = 650}):ease("quartinout"):delay(0.2)
+    --Anim.to(Headline.LeftBarPurple, 1, {y = 650}):ease("quartinout"):delay(0.2)
+    Anim.to(Headline.LeftBarPurple, 1, {y = 650}):ease("quartout"):delay(0.2)
+    
 
     --Move Lower Text up
     Headline.TextYLo = 820+215
