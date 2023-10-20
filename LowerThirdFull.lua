@@ -518,9 +518,23 @@ function ShowPresenterName()
         return
     end
 
-       --If badge is showing fade output its clear part
+        --If badge is showing fade output its clear part
     if LowerThirdFull.ProgramBadgeShowing == true then
         Timer.tween(0.5,LowerThirdFull.ProgramBadge.ClearPartCol, {0,0,0,0.0})
+    end
+
+    --If breaking text is showing, hide it
+    if LowerThirdFull.BreakingBox.h > 0 then
+        HideBreakingLowerThird()
+        Timer.after(0.9, function() ShowPresenterName() end)
+        return
+    end
+
+    --If lower third text is showing, hide it
+    if LowerThirdFull.LowerThirdTitleShowing == true then
+        HideLowerThirdText()
+        Timer.after(1.3, function() ShowPresenterName() end)
+        return
     end
 
 
@@ -565,7 +579,6 @@ function ShowPresenterName()
         Anim.to(LowerThirdFull.PresenterSubtitle, 1, {y = 880}):ease("cubicout")
 
     end
-    
 end
 
 function ShowPresenterNameSolo()
@@ -710,8 +723,7 @@ function ShowLowerThirdText(Title, Subtitles, boxText, boxTcolor, boxBcolor)
     if Subtitles[1] == nil or Subtitles[1] == "" or Subtitles[1] == "NOP" then LowerThirdFull.SingleText.Showing = true ShowLowerThirdTextSingle(Title, boxText, boxTcolor, boxBcolor) return end
 
     if LowerThirdFull.LowerThirdShowing == false then
-        ShowLowerThirdFull()
-        Timer.after(0.7, function() ShowLowerThirdText(Title, Subtitles, boxText, boxTcolor, boxBcolor) end)
+        ShowLowerThirdTextSolo(Title, Subtitles, boxText, boxTcolor, boxBcolor)
         return
     elseif LowerThirdFull.PresenterNameShowing == true then
         HidePresenterName()
@@ -1161,8 +1173,7 @@ function LoopBetweenSubtitles()
     end
 end
 
-
-function HideLowerThirdText()
+function HideLowerThirdTextSolo()
 
     
     if LowerThirdFull.SingleText.Showing == true then
@@ -1170,6 +1181,96 @@ function HideLowerThirdText()
         HideLowerThirdTextSingle()
         return
     end
+
+
+    LowerThirdFull.LowerThirdTitleShowing = false
+
+    if OnSub1Timer ~= nil then Timer.cancel(OnSub1Timer) end
+    if OnSub2Timer ~= nil then Timer.cancel(OnSub2Timer) end
+    if OnSub1EndTimer ~= nil then Timer.cancel(OnSub1EndTimer) end
+    if OnSub2TimerEnd ~= nil then Timer.cancel(OnSub2TimerEnd) end
+
+    LowerThirdFull.OnSubtitle = 1
+
+
+    if LowerThirdFull.LowerThirdBoxShowing == true then
+        HideLowerThirdBox()
+        Timer.after(0.5, function() HideLowerThirdText() end)
+        return
+    end
+
+    --Move clear part down and shrink it
+    Anim.to(LowerThirdFull.ClearPart, 0.8, {y = 990, h = 50}):ease("cubicinout")
+    --And its scissor
+    Anim.to(LowerThirdFull.ClearPartScissor, 0.8, {y = 940, h = 50}):ease("cubicinout")
+
+    --Move BBC box down
+    Anim.to(LowerThirdFull.BBCBox, 0.8, {y = 990}):ease("cubicinout")
+
+    --Move BBC text down
+    Anim.to(LowerThirdFull.BBCText, 0.8, {y = 984}):ease("cubicinout")
+
+    --Move the title down
+    Anim.to(LowerThirdFull.LowerThirdTitle, 0.8, {y = 1010}):ease("cubicinout")
+
+    --Move the subtitle 1 down
+    Anim.to(LowerThirdFull.LowerThirdSubtitle1, 0.8, {y = 1060}):ease("cubicinout")
+
+    --Move the subtitle 2 down
+    Anim.to(LowerThirdFull.LowerThirdSubtitle2, 0.8, {y = 1110}):ease("cubicinout")
+
+    Timer.after(0.8, function() 
+        LowerThirdFull.LowerThirdTitle.Text = ""
+
+        LowerThirdFull.ClearPartScissor = {
+            x = 0,
+            y = 1036,
+            w = 1920,
+            h = 48,
+        }
+
+        --Move the White part down
+    LowerThirdFull.WhitePart.y = 1080
+
+    --Move the clear part down
+    LowerThirdFull.ClearPart.y = 1080
+
+    --Move the clearpart scissor down
+    LowerThirdFull.ClearPartScissor.y = 1036
+
+    --Move the BBC box down
+    LowerThirdFull.BBCBox.y = 1080
+
+    --Move the BBC text down
+    LowerThirdFull.BBCText.y = 1071
+
+    end)
+
+    if LowerThirdFull.ProgramBadgeShowing == true then
+        --Move the program badge down
+        Anim.to(LowerThirdFull.ProgramBadge, 0.8, {y = 940}):ease("cubicinout")
+
+        --Move program badge scissors down
+        Anim.to(LowerThirdFull.ProgramBadge, 0.8, {scissorY = 940}):ease("cubicinout")
+    end
+    
+end
+
+
+function HideLowerThirdText()
+
+    
+    if LowerThirdFull.LowerThirdShowing == false then
+        HideLowerThirdTextSolo()
+        return
+    end
+    
+    if LowerThirdFull.SingleText.Showing == true then
+        LowerThirdFull.SingleText.Showing = false
+        HideLowerThirdTextSingle()
+        return
+    end
+
 
 
     LowerThirdFull.LowerThirdTitleShowing = false
@@ -1228,6 +1329,20 @@ function ShowBreakingTitle(text)
         HideProgramBadge()
     end
 
+    --Hide lower third text if showing
+    if LowerThirdFull.LowerThirdTitleShowing == true then
+        HideLowerThirdText()
+        Timer.after(0.2, function() ShowBreakingTitle(text) end)
+        return
+    end
+
+    --Hide presenter name if showing
+    if LowerThirdFull.PresenterNameShowing == true then
+        HidePresenterName()
+        Timer.after(0.2, function() ShowBreakingTitle(text) end)
+        return
+    end
+
     --Adjust font size dynamically 
     local fontSize = 90
     yAdjusted = 0
@@ -1248,42 +1363,43 @@ function ShowBreakingTitle(text)
             yAdjusted = yAdjusted + 0.7
         else 
             fontSizeMet = true
-            print("Font size "..fontSize )
+            -- print("Font size "..fontSize )
         end
 
     end
 
+    Timer.after(0.8, function ()
 
-    --Expand the breaking part up
+        --Expand the breaking part up
 
-    LowerThirdFull.LowerThirdTitleShowing = true
-    LowerThirdFull.BreakingBox.Text1Y = 0
-    LowerThirdFull.LowerThirdTitle.Text = ""
-    LowerThirdFull.BreakingBox.Text1 = "BREAKING"
-    LowerThirdFull.BreakingBox.Text1Showing = true
-    LowerThirdFull.BreakingBox.Text2 = text
-    LowerThirdFull.BreakingBox.Text2Y = 110+yAdjusted
+        
+        LowerThirdFull.BreakingBox.Text1Y = 0
+        LowerThirdFull.LowerThirdTitle.Text = ""
+        LowerThirdFull.BreakingBox.Text1 = "BREAKING"
+        LowerThirdFull.BreakingBox.Text1Showing = true
+        LowerThirdFull.BreakingBox.Text2 = text
+        LowerThirdFull.BreakingBox.Text2Y = 110+yAdjusted
 
-    
-  --Move clear part up and heighen it
-  Anim.to(LowerThirdFull.ClearPart, 1, {y = 940-120, h = 170}):ease("cubicinout")
-    Anim.to(LowerThirdFull.BreakingBox, 1, {y = 940-120, h = 170}):ease("cubicinout")
-    --And its scissor
-    Anim.to(LowerThirdFull.ClearPartScissor, 1, {y = 940-185, h = 235}):ease("cubicinout")
+        --Move clear part up and heighen it
+        Anim.to(LowerThirdFull.ClearPart, 1, {y = 940-120, h = 170}):ease("cubicout")
+        Anim.to(LowerThirdFull.BreakingBox, 1, {y = 940-120, h = 170}):ease("cubicout")
+        --And its scissor
+        Anim.to(LowerThirdFull.ClearPartScissor, 1, {y = 940-185, h = 235}):ease("cubicout")
 
-    --Move BBC box up
-    Anim.to(LowerThirdFull.BBCBox, 1, {y = 940-120}):ease("cubicinout")
+        --Move BBC box up
+        Anim.to(LowerThirdFull.BBCBox,1, {y = 940-120}):ease("cubicout")
 
-    --Move BBC text up
-    Anim.to(LowerThirdFull.BBCText, 1, {y = 934-120}):ease("cubicinout")
+        --Move BBC text up
+        Anim.to(LowerThirdFull.BBCText,1, {y = 934-120}):ease("cubicout")
 
-    if LowerThirdFull.ProgramBadgeShowing == true then
-        --Move the program badge up
-        Anim.to(LowerThirdFull.ProgramBadge, 1, {y = 940-120}):ease("cubicinout")
- 
-        --Move program badge scissors up
-        Anim.to(LowerThirdFull.ProgramBadge, 1, {scissorY = 940-120}):ease("cubicinout")
-    end
+        if LowerThirdFull.ProgramBadgeShowing == true then
+            --Move the program badge up
+            Anim.to(LowerThirdFull.ProgramBadge, 1, {y = 940-120}):ease("cubicout")
+
+            --Move program badge scissors up
+            Anim.to(LowerThirdFull.ProgramBadge, 1, {scissorY = 940-120}):ease("cubicout")
+        end
+    end)
 end
 
 function AdvanceBreakingTitle()
@@ -1291,15 +1407,15 @@ function AdvanceBreakingTitle()
     if LowerThirdFull.BreakingBox.Text1Showing == true then
         LowerThirdFull.BreakingBox.Text2Y = 110+yAdjusted
 
-        Anim.to(LowerThirdFull.BreakingBox, 0.8, {Text1Y = -110}):ease("cubicinout")
-        Anim.to(LowerThirdFull.BreakingBox, 0.8, {Text2Y = yAdjusted}):ease("cubicinout")
+        Anim.to(LowerThirdFull.BreakingBox, 0.8, {Text1Y = -110}):ease("cubicout")
+        Anim.to(LowerThirdFull.BreakingBox, 0.8, {Text2Y = yAdjusted}):ease("cubicout")
         LowerThirdFull.BreakingBox.Text1Showing = false
         LowerThirdFull.BreakingBox.Text2Showing = true
     else
         LowerThirdFull.BreakingBox.Text1Y = 110
 
-        Anim.to(LowerThirdFull.BreakingBox, 0.8, {Text1Y = 0}):ease("cubicinout")
-        Anim.to(LowerThirdFull.BreakingBox, 0.8, {Text2Y = -110}):ease("cubicinout")
+        Anim.to(LowerThirdFull.BreakingBox, 0.8, {Text1Y = 0}):ease("cubicout")
+        Anim.to(LowerThirdFull.BreakingBox, 0.8, {Text2Y = -110}):ease("cubicout")
         LowerThirdFull.BreakingBox.Text1Showing = true
         LowerThirdFull.BreakingBox.Text2Showing = false
     end
@@ -1307,12 +1423,55 @@ function AdvanceBreakingTitle()
 end
 
 function ShowBreakingLowerThird(text, subtitles)
+
+    --if the lower third is showing, hide it
+    if LowerThirdFull.LowerThirdTitleShowing == true then
+        HideLowerThirdText()
+        Timer.after(1.3, function() ShowBreakingLowerThird(text, subtitles) end)
+        return
+    end
+
+    --if the presenter name is showing, hide it
+    if LowerThirdFull.PresenterNameShowing == true then
+        HidePresenterName()
+        Timer.after(0.8, function() ShowBreakingLowerThird(text, subtitles) end)
+        return
+    end
+
+    
+
     if LowerThirdFull.BreakingBox.Text1Showing == true then
         Anim.to(LowerThirdFull.BreakingBox, 0.8, {Text1Y = -110}):ease("cubicinout")
         LowerThirdFull.BreakingBox.Text1Showing = false
     else
         Anim.to(LowerThirdFull.BreakingBox, 0.8, {Text2Y = -110}):ease("cubicinout")
         LowerThirdFull.BreakingBox.Text2Showing = false
+    end
+
+    --If the breaking part was not showig, show it
+    if LowerThirdFull.BreakingBox.h == 0 then
+        
+        --Move clear part up and heighen it
+        LowerThirdFull.BreakingBox.Text1 = ""
+        LowerThirdFull.BreakingBox.Text2 = ""
+        Anim.to(LowerThirdFull.ClearPart, 1, {y = 940-120, h = 170}):ease("cubicout")
+        Anim.to(LowerThirdFull.BreakingBox, 1, {y = 940-120, h = 170}):ease("cubicout")
+        --And its scissor
+        Anim.to(LowerThirdFull.ClearPartScissor, 1, {y = 940-185, h = 235}):ease("cubicout")
+
+        --Move BBC box up
+        Anim.to(LowerThirdFull.BBCBox,1, {y = 940-120}):ease("cubicout")
+
+        --Move BBC text up
+        Anim.to(LowerThirdFull.BBCText,1, {y = 934-120}):ease("cubicout")
+
+        if LowerThirdFull.ProgramBadgeShowing == true then
+            --Move the program badge up
+            Anim.to(LowerThirdFull.ProgramBadge, 1, {y = 940-120}):ease("cubicout")
+
+            --Move program badge scissors up
+            Anim.to(LowerThirdFull.ProgramBadge, 1, {scissorY = 940-120}):ease("cubicout")
+        end
     end
 
     Timer.after(0.3,function() ShowLowerThirdBox("BREAKING", {184/255,0,0,1},{1,1,1,1}) end)
@@ -1327,7 +1486,7 @@ function ShowBreakingLowerThird(text, subtitles)
         Timer.after(1, function() Anim.to(LowerThirdFull.LowerThirdBox.tCol, 0.2, {184/255,0,0,0}):ease("cubicinout") end)
         Timer.after(1.2, function() Anim.to(LowerThirdFull.LowerThirdBox.tCol, 0.2, {184/255,0,0,1}):ease("cubicinout") end)
 
-        LowerThirdFull.LowerThirdTitleShowing = true
+        
 
         LowerThirdFull.LowerThirdTitle.Text = text
 
@@ -1350,12 +1509,15 @@ function ShowBreakingLowerThird(text, subtitles)
 end
 
 function HideBreakingLowerThird()
+    local delay = 0.2
     if LowerThirdFull.BreakingBox.Text1Showing == true then
         Anim.to(LowerThirdFull.BreakingBox, 0.8, {Text1Y = -100}):ease("cubicinout")
         LowerThirdFull.BreakingBox.Text1Showing = false
+        delay = 0.8
     elseif LowerThirdFull.BreakingBox.Text2Showing == true then
         Anim.to(LowerThirdFull.BreakingBox, 0.8, {Text2Y = -100}):ease("cubicinout")
         LowerThirdFull.BreakingBox.Text2Showing = false
+        delay = 0.8
     end
 
     LowerThirdFull.LowerThirdTitleShowing = false
@@ -1367,33 +1529,35 @@ function HideBreakingLowerThird()
 
     LowerThirdFull.OnSubtitle = 1
 
-    Timer.after(0.3,function() HideLowerThirdBox() end)
-    Timer.after(0.5, function()
+    HideLowerThirdBox()
+    
+    Timer.after(delay, function()
+        
         LowerThirdFull.LowerThirdTitleShowing = false
         LowerThirdFull.BreakingBox.Text1 = ""
         LowerThirdFull.BreakingBox.Text2 = ""
 
         --Move the text down
-        Anim.to(LowerThirdFull.LowerThirdTitle, 1, {y = 980}):ease("cubicinout")
+        Anim.to(LowerThirdFull.LowerThirdTitle, 0.8, {y = 980}):ease("cubicinout")
 
         --Move the subtitle 1 down
-        Anim.to(LowerThirdFull.LowerThirdSubtitle1, 1, {y = 980+70}):ease("cubicinout")
+        Anim.to(LowerThirdFull.LowerThirdSubtitle1, 0.8, {y = 980+70}):ease("cubicinout")
 
         --Move the subtitle 2 down
-        Anim.to(LowerThirdFull.LowerThirdSubtitle2, 1, {y = 980+140}):ease("cubicinout")
+        Anim.to(LowerThirdFull.LowerThirdSubtitle2, 0.8, {y = 980+140}):ease("cubicinout")
     end)
 
      --Move clear part down and shrink it
-     Anim.to(LowerThirdFull.ClearPart, 0.8, {y = 940, h = 50}):ease("cubicinout"):delay(0.8)
-     Anim.to(LowerThirdFull.BreakingBox, 0.8, {y = 988, h = 0}):ease("cubicinout"):delay(0.8)
+     Anim.to(LowerThirdFull.ClearPart, 0.8, {y = 940, h = 50}):ease("cubicinout"):delay(delay)
+     Anim.to(LowerThirdFull.BreakingBox, 0.8, {y = 988, h = 0}):ease("cubicinout"):delay(delay)
      --And its scissor
-     Anim.to(LowerThirdFull.ClearPartScissor, 0.8, {y = 940, h = 50}):ease("cubicinout"):delay(0.8)
+     Anim.to(LowerThirdFull.ClearPartScissor, 0.8, {y = 940, h = 50}):ease("cubicinout"):delay(delay)
  
      --Move BBC box down
-     Anim.to(LowerThirdFull.BBCBox, 0.8, {y = 940}):ease("cubicinout"):delay(0.8)
+     Anim.to(LowerThirdFull.BBCBox, 0.8, {y = 940}):ease("cubicinout"):delay(delay)
  
      --Move BBC text down
-     Anim.to(LowerThirdFull.BBCText, 0.8, {y = 934}):ease("cubicinout"):delay(0.8)
+     Anim.to(LowerThirdFull.BBCText, 0.8, {y = 934}):ease("cubicinout"):delay(delay)
 
      if LowerThirdFull.ProgramBadgeShouldShow == true then
         Timer.after(1.5, function() ShowProgramBadge(LowerThirdFull.ProgramBadge.Text, LowerThirdFull.ProgramBadge.tcol, LowerThirdFull.ProgramBadge.bcol) end)
