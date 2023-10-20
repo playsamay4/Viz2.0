@@ -399,6 +399,18 @@ function ShowLowerThirdFull()
         return
     end
 
+    if LowerThirdFull.PresenterNameShowing == true then
+        ShowTickerOnly()
+        return
+    end
+
+    if LowerThirdFull.LowerThirdTitleShowing == true then
+        ShowTickerOnly()
+        return
+    end
+
+    
+
     LowerThirdFullShowing = true
 
     
