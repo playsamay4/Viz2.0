@@ -409,7 +409,7 @@ function ShowLowerThirdFull()
         return
     end
 
-    
+
 
     LowerThirdFullShowing = true
 
@@ -961,7 +961,7 @@ function ShowLowerThirdTextSingle(Title, boxText, boxTcolor, boxBcolor)
         return
     elseif LowerThirdFull.PresenterNameShowing == true then
         HidePresenterName()
-        Timer.after(0.8, function() ShowLowerThirdText(Title, boxText, boxTcolor, boxBcolor) end)
+        Timer.after(0.8, function() ShowLowerThirdTextSingle(Title, boxText, boxTcolor, boxBcolor) end)
         return
     end
 
