@@ -61,7 +61,7 @@ LowerThirdFull = {
         Text1 = "BREAKING",
         Text1Showing = false,
         Text1Y = 0,
-        Text2 = "U.S. Journalist arrested in Russia",
+        Text2 = " ",
         Text2Showing = false,
         Text2Y = 0,
         Font1 = love.graphics.newFont("fonts/ReithSansBd.ttf",95),
@@ -82,16 +82,16 @@ LowerThirdFull = {
 
     --Presenter Name text
     PresenterName = {
-        x = 280,
+        x = 295,
         y = 940,
         w = 1920,
         h = 48,
         col = {1, 1, 1, 1},
-        Text = "Jack Kennedy\nMother of three"
+        Text = " "
     },
 
     PresenterSubtitle = {
-        x = 281,
+        x = 295,
         y = 1100,
         w = 1920,
         h = 48,
@@ -105,7 +105,7 @@ LowerThirdFull = {
         x = 310,
         y = 986,
         col = {0.2,0.2,0.2,0},
-        Text = "BBC.com/news"
+        Text = " "
     },
 
     TickerBlock = {
@@ -135,14 +135,14 @@ LowerThirdFull = {
         x = 290,
         y = 1060,
         col = {1,1,1,1},
-        Text = "Lower Third Subtitle 1"
+        Text = " "
     },
 
     LowerThirdSubtitle2 = {
         x = 290,
         y = 1110,
         col = {1,1,1,1},
-        Text = "Lower Third Subtitle 2"
+        Text = " "
     },
     OnSubtitle = 1,
 
