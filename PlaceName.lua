@@ -110,13 +110,15 @@ function ShowPlaceName(text)
 end
 
 function ShowPlaceNameWithTime(text, TimeOffset)
-    PlaceName.TimeOffset = TimeOffset*3600
+
 
     if PlaceNameShowing then 
         HidePlaceName()
         Timer.after(0.5, function() ShowPlaceNameWithTime(text, TimeOffset) end)
     return
     end
+
+    PlaceName.TimeOffset = TimeOffset*3600
 
     PlaceNameShowing = true
     PlaceName.Name = text
