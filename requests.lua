@@ -205,6 +205,20 @@ server:on("headline", function(data)
             TitleLogo.image = newsTitle
         end
 
+        if gillMode == true then
+            if TitleLogo.image == newsTitle then
+                TitleLogo.image = newsTitleGill
+            elseif TitleLogo.image == worldTitle then
+                TitleLogo.image = worldTitleGill
+            end
+        else
+            if TitleLogo.image == newsTitleGill then
+                TitleLogo.image = newsTitle
+            elseif TitleLogo.image == worldTitleGill then
+                TitleLogo.image = worldTitle
+            end
+        end
+
         if data.clockMode == "default" or data.clockMode == "breakfast" then 
             LowerThirdClock.ShowClock = true
             if LowerThirdFullShowing == true then

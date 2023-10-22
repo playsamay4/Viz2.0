@@ -1,4 +1,5 @@
 local BBCTextReithSansBold = love.graphics.newFont("fonts/ReithSansBd.ttf",35)
+local BBCTextReithSansMedium = love.graphics.newFont("fonts/ReithSansMd.ttf",35)
 
 
 LowerThirdFull = {
@@ -265,11 +266,21 @@ function DrawLowerThirdFull()
         love.graphics.setScissor(LowerThirdFull.ClearPartScissor.x,LowerThirdFull.ClearPartScissor.y,LowerThirdFull.ClearPartScissor.w,LowerThirdFull.ClearPartScissor.h)
         
         love.graphics.setColor(1,1,1,1)
-        love.graphics.draw(BBCSmall,LowerThirdFull.BBCBox.x+13,LowerThirdFull.BBCBox.y+7, 0 , 0.045, 0.045)
+        if gillMode == true then
+            love.graphics.draw(BBCSmallGill,LowerThirdFull.BBCBox.x+13,LowerThirdFull.BBCBox.y+7, 0 , 0.045, 0.045)
+        else
+            love.graphics.draw(BBCSmall,LowerThirdFull.BBCBox.x+13,LowerThirdFull.BBCBox.y+7, 0 , 0.045, 0.045)
+        end
 
         love.graphics.setColor(LowerThirdFull.BBCText.col)
-        love.graphics.setFont(BBCTextReithSansBold)
-        love.graphics.print(LowerThirdFull.BBCText.Text, LowerThirdFull.BBCText.x, LowerThirdFull.BBCText.y+5)
+        if gillMode == true then
+            love.graphics.setFont(BBCTextReithSansMedium)
+            love.graphics.print(LowerThirdFull.BBCText.Text, LowerThirdFull.BBCText.x, LowerThirdFull.BBCText.y+5)
+        else
+            love.graphics.setFont(BBCTextReithSansBold)
+            love.graphics.print(LowerThirdFull.BBCText.Text, LowerThirdFull.BBCText.x, LowerThirdFull.BBCText.y+5)
+        end
+        
 
         --Lower Third Title
         -- love.graphics.setColor(0.5,0,0,0.5)

@@ -251,12 +251,21 @@ function DrawHeadlineSingle()
 
         --BBC Box Text
          love.graphics.setColor(1,1,1,1)
-         love.graphics.setFont(ReithSansBold)
+         if gillMode == true then
+            love.graphics.setFont(ReithSansMediumHeadline)
+         else 
+            love.graphics.setFont(ReithSansBold)
+         end
          love.graphics.print(Headline.BBCText.Text,Headline.BBCText.x,Headline.BBCText.y)
  
          --BBC Logo 
          love.graphics.setColor(1,1,1,1)
-         love.graphics.draw(BBCSmall,Headline.BBCLogo.x,Headline.BBCLogo.y,0,0.04,0.04)
+         if gillMode == true then
+            love.graphics.draw(BBCSmallGill,Headline.BBCLogo.x,Headline.BBCLogo.y,0,0.04,0.04)
+         else 
+            love.graphics.draw(BBCSmall,Headline.BBCLogo.x,Headline.BBCLogo.y,0,0.04,0.04)
+         end
+         
         end
 
         --Coming Up Box
@@ -410,12 +419,21 @@ function DrawHeadlineDouble()
 
         --BBC Box Text
          love.graphics.setColor(1,1,1,1)
-         love.graphics.setFont(ReithSansBold)
+         if gillMode == true then
+            love.graphics.setFont(ReithSansMediumHeadline)
+         else 
+            love.graphics.setFont(ReithSansBold)
+         end
+         
          love.graphics.print(Headline.BBCText.Text,Headline.BBCText.x,Headline.BBCText.y)
  
          --BBC Logo 
          love.graphics.setColor(1,1,1,1)
-         love.graphics.draw(BBCSmall,Headline.BBCLogo.x,Headline.BBCLogo.y,0,0.04,0.04)
+         if gillMode == true then
+            love.graphics.draw(BBCSmallGill,Headline.BBCLogo.x,Headline.BBCLogo.y,0,0.04,0.04)
+         else 
+            love.graphics.draw(BBCSmall,Headline.BBCLogo.x,Headline.BBCLogo.y,0,0.04,0.04)
+         end
     end
 
         --Coming Up Box

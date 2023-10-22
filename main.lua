@@ -17,8 +17,15 @@ KeepBottomText = ""
 EnableBadge = false
 shouldUsePush = false
 
+gillMode = false
+showGillModeNotice = false
+showGillModeNoticeTimer = nil
+
 newsTitle = love.graphics.newImage("images/bbcbox.png")
 worldTitle = love.graphics.newImage("images/worldbox.png")
+
+newsTitleGill = love.graphics.newImage("images/bbcboxgill.png")
+worldTitleGill = love.graphics.newImage("images/worldboxgill.png")
 
 server = sock.newServer("*", 10655)
 
@@ -54,11 +61,13 @@ function love.load()
     Fader = love.graphics.newImage("images/HeadlineFade.png")
 
     BBCSmall = love.graphics.newImage("images/WhiteLogoTransparent.png")
+    BBCSmallGill = love.graphics.newImage("images/GillSansLogoWhite.png")
 
     ReithSerif = love.graphics.newFont("fonts/ReithSerifRg.ttf",130)
     ReithSansBold = love.graphics.newFont("fonts/ReithSansBd.ttf",30)
     ReithSansRegular = love.graphics.newFont("fonts/ReithSansRg.ttf",30)
     ReithSansMedium = love.graphics.newFont("fonts/ReithSansMd.ttf",30)
+    ReithSansMediumHeadline = love.graphics.newFont("fonts/ReithSansMd.ttf",31)
 
     TickerFont = love.graphics.newFont("fonts/ReithSansMd.ttf",32)
     TickerFontBold = love.graphics.newFont("fonts/ReithSansBd.ttf",32)
@@ -143,9 +152,26 @@ function love.draw()
         love.graphics.setColor(1,1,1,waterMarkFade.a-0.7)
         love.graphics.setFont(waterMarkFontSmall)
         love.graphics.print("Press F11 to toggle fullscreen mode", 10, 10)
-        
     end
     
+    if showGillModeNotice == true then
+        if gillMode == true then
+            love.graphics.setColor(185/255,0,0,0.3)
+            love.graphics.rectangle("fill", 95,103, 180, 23)
+
+            love.graphics.setColor(1,1,1,1)
+            love.graphics.setFont(waterMarkFontSmall)
+            love.graphics.print("Gill Mode Enabled", 100, 100)
+        else
+            love.graphics.setColor(185/255,0,0,0.3)
+            love.graphics.rectangle("fill", 95,103, 185, 23)
+
+            love.graphics.setColor(1,1,1,1)
+            love.graphics.setFont(waterMarkFontSmall)
+            love.graphics.print("Gill Mode Disabled", 100, 100)
+        end
+    end
+
     if shouldUsePush == true then push:finish() end
 end
 function love.keypressed(key)
@@ -225,10 +251,6 @@ function love.keypressed(key)
         HidePresenterName()
     end
 
-    if key == "n" then
-        waterMark = not waterMark
-    end
-
     if key == "d" then
         ShowLowerThirdTextSolo("Lorem ipsum dolor sit amet", {"blah blah blah fhdoiha98h489vm948yn58 ", "manchester united are rubbish"})
     end
@@ -246,6 +268,33 @@ function love.keypressed(key)
         HideShitHeadlines()
     end
 
+    if key == "g" then
+        if showGillModeNoticeTimer ~= nil then Timer.cancel(showGillModeNoticeTimer) end
+
+        gillMode = not gillMode
+        showGillModeNotice = true
+
+
+        showGillModeNoticeTimer = Timer.after(2, function()
+            showGillModeNotice = false
+        end)
+
+        if gillMode == true then
+            if TitleLogo.image == newsTitle then
+                TitleLogo.image = newsTitleGill
+            elseif TitleLogo.image == worldTitle then
+                TitleLogo.image = worldTitleGill
+            end
+        else
+            if TitleLogo.image == newsTitleGill then
+                TitleLogo.image = newsTitle
+            elseif TitleLogo.image == worldTitleGill then
+                TitleLogo.image = worldTitle
+            end
+        end
+           
+    end
+
     if key == "s" then
        RemoveShitHeadline()
     end
@@ -259,7 +308,7 @@ function love.keypressed(key)
         HideChameleon()
     end
 
-    if key == "z" then
+    if key == "n" then
         Timer.tween(0.8, waterMarkFade, {a = 0}, "in-out-cubic", function()
             waterMark = false
         end)
@@ -277,29 +326,6 @@ function love.keypressed(key)
         end
     end
 
-    -- if key == "]" then
-    --     ShitHeadlines.lookN.HeadBox.h = ShitHeadlines.lookN.HeadBox.h + 1
-    -- end
-
-    -- if key == "[" then
-    --     ShitHeadlines.lookN.HeadBox.h = ShitHeadlines.lookN.HeadBox.h - 1
-    -- end
-
-    -- if key == ";" then
-    --     ShitHeadlines.lookN.HeadBox.y = ShitHeadlines.lookN.HeadBox.y + 1
-    -- end
-
-    -- if key == "\'" then
-    --     ShitHeadlines.lookN.HeadBox.y = ShitHeadlines.lookN.HeadBox.y - 1
-    -- end
-
-    -- if key == "," then
-    --     ShitHeadlines.lookN.HeadBox.x = ShitHeadlines.lookN.HeadBox.x - 1
-    -- end
-
-    -- if key == "." then
-    --     ShitHeadlines.lookN.HeadBox.x = ShitHeadlines.lookN.HeadBox.x + 1
-    -- end
 end
 
 function love.resize(w,h)
