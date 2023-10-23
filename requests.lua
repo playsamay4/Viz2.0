@@ -472,7 +472,10 @@ server:on("headline", function(data)
             {mode = "Head", text = "HEADLINES", duration = 3}
         }
 
+        local limit = data.Limit
+
         for i,v in ipairs(data.Text) do
+            if limit ~= 0 and i > limit then break end
             table.insert(tickerText, {mode = "Normal", text = v, duration = 5})
         end
 

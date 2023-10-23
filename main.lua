@@ -151,7 +151,7 @@ function love.draw()
 
         love.graphics.setColor(1,1,1,waterMarkFade.a-0.7)
         love.graphics.setFont(waterMarkFontSmall)
-        love.graphics.print("Press F11 to toggle fullscreen mode", 10, 10)
+        love.graphics.print("Press F11 to toggle fullscreen mode                                                                                                                                                                                                                                                                                                            1.2.0", 10, 10)
     end
     
     if showGillModeNotice == true then
