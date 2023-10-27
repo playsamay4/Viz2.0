@@ -5,7 +5,7 @@ on:
     branches: [ main ]
 jobs:
   # Build viz
-  build-hello_world:
+  build-viz:
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
